@@ -1,6 +1,10 @@
 #!/bin/bash
 set -e
 
+# Ensure socket directory exists (in case /run is tmpfs)
+mkdir -p /run/mysqld
+chown -R mysql:mysql /run/mysqld
+
 # Initialize MariaDB if not yet initialized
 if [ ! -d "/var/lib/mysql/mysql" ]; then
     echo "Initializing MariaDB database..."
