@@ -2,13 +2,14 @@ FROM debian:bullseye
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Install MariaDB
+# Install MariaDB server + client
 RUN apt-get update && \
-    apt-get install -y mariadb-server && \
+    apt-get install -y mariadb-server mariadb-client && \
     rm -rf /var/lib/apt/lists/*
 
-# Fix: Create directory for MariaDB UNIX socket
-RUN mkdir -p /run/mysqld && chown -R mysql:mysql /run/mysqld
+# Create runtime directory for MariaDB UNIX socket
+RUN mkdir -p /run/mysqld && \
+    chown -R mysql:mysql /run/mysqld
 
 # Expose MariaDB port
 EXPOSE 3306
@@ -17,9 +18,5 @@ EXPOSE 3306
 COPY docker-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
-# Metadata
-LABEL version="1.0"
-LABEL description="MariaDB Server with .env support"
-
-ENTRYPOINT ["docker-entrypoint.sh"]
-CMD ["mariadbd"]
+ENTRYPOINT ["docker-entrypoint.sh"]  
+CMD ["mysqld_safe"]
