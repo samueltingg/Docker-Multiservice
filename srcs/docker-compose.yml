@@ -1,13 +1,31 @@
+networks:
+  wp-net:
+
+volumes:
+  mariadb_vol:
+  wordpress_vol:
+
 services:
   mariadb:
     build: ./requirements/mariadb
     container_name: mariadb_container
     env_file:
       - .env
-    ports:
-      - "3306:3306"
+    networks:
+      - wp-net
     volumes:
       - mariadb_vol:/var/lib/mysql
 
-volumes:
-  mariadb_vol:
+  wordpress:
+    build: ./requirements/wordpress # Path to your custom WP+PHP-FPM Dockerfile
+    container_name: wordpress_container
+    env_file:
+      - .env
+    networks:
+      - wp-net
+    depends_on:
+      - mariadb
+    volumes:
+      - wordpress_vol:/var/www/html
+    expose:
+      - "9000" # Expose PHP-FPM port to other containers (not host)
