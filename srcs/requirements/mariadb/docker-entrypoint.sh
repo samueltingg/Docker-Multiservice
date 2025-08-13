@@ -33,4 +33,4 @@ if [ ! -d "/var/lib/mysql/mysql" ]; then
 fi
 
 echo "Starting MariaDB..."
-exec "$@"
+exec gosu mysql "$@"

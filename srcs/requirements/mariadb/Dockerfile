@@ -4,7 +4,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 # Install MariaDB server + client
 RUN apt-get update && \
-    apt-get install -y mariadb-server mariadb-client
+    apt-get install -y mariadb-server mariadb-client gosu
 
 # Deletes cached package list files to reduce image size
 RUN rm -rf /var/lib/apt/lists/*
