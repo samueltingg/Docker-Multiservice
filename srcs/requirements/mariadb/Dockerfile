@@ -12,11 +12,6 @@ RUN rm -rf /var/lib/apt/lists/*
 # Clears out default MariaDB data directory to start with clean database state
 RUN rm -rf /var/lib/mysql/*
 
-# Create runtime directory for MariaDB UNIX socket
-RUN mkdir -p /run/mysqld && \
-    chown -R mysql:mysql /run/mysqld
-        # give mysql user ownership of the directory
-
 # Expose MariaDB port
 EXPOSE 3306
 

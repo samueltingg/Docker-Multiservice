@@ -1,8 +1,9 @@
 #!/bin/bash
 set -e
 
-# Ensure socket directory exists (in case /run is tmpfs)
+# Create runtime directory for MariaDB UNIX socket
 mkdir -p /run/mysqld
+# give mysql user ownership of the directory
 chown -R mysql:mysql /run/mysqld
 
 # Initialize MariaDB if not yet initialized
