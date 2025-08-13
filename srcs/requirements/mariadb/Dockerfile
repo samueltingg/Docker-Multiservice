@@ -19,8 +19,5 @@ EXPOSE 3306
 COPY docker-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
-# switch to mysql user for runtime
-USER mysql
-
 ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["mysqld_safe"]
