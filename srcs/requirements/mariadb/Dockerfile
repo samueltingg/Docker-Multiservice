@@ -12,15 +12,15 @@ RUN rm -rf /var/lib/apt/lists/*
 # Clears out default MariaDB data directory to start with clean database state
 RUN rm -rf /var/lib/mysql/*
 
-# switch to mysql user for runtime
-USER mysql
-
 # Expose MariaDB port
 EXPOSE 3306
 
 # Copy and make entrypoint executable
 COPY docker-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
+# switch to mysql user for runtime
+USER mysql
 
 ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["mysqld_safe"]
