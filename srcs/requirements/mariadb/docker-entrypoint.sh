@@ -1,7 +1,10 @@
 #!/bin/bash
 set -e
 
-# Create runtime directory for MariaDB UNIX socket
+# MariaDB Unix Socket file is the default socket file,
+    # acting as a "meeting point" for communication between MariaDB client(mariaDB CLI) & MariaDB server(mysqld)
+
+# Create runtime directory for MariaDB UNIX socket file
 mkdir -p /run/mysqld
 # give mysql user ownership of the directory
 chown -R mysql:mysql /run/mysqld
