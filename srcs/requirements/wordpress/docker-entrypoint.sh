@@ -11,6 +11,7 @@ if [ -n "$WORDPRESS_DB_HOST" ]; then # check if env var is non-empty
     until mariadb -h"$WORDPRESS_DB_HOST" -u"$WORDPRESS_DB_USER" -p"$WORDPRESS_DB_PASSWORD" -e "SELECT 1;" &>/dev/null; do
         sleep 2
     done
+    echo "MariaDB is ready!"
 fi
 
 # If wp-config.php doesn't exist, create it
