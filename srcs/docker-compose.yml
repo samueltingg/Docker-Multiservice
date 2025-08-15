@@ -29,3 +29,19 @@ services:
       - wordpress_vol:/var/www/html
     expose:
       - "9000" # Expose PHP-FPM port to other containers (not host)
+          
+  nginx:
+    build: ./requirements/nginx # Path to your custom nginx Dockerfile
+    container_name: nginx_container
+    env_file:
+      - .env
+    networks:
+      - wp-net
+    depends_on:
+      - wordpress
+    volumes:
+      - wordpress_vol:/var/www/html
+    expose:
+      - "443" # ? NEEDED?
+    ports:
+      - "443:443" # publish HTTPS to host
