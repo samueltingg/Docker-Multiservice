@@ -34,4 +34,4 @@ COPY docker-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
 ENTRYPOINT ["docker-entrypoint.sh"]
-CMD ["php-fpm", "-F"]
+CMD ["php-fpm7.4", "-F"]
