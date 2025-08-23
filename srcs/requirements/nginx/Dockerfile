@@ -5,7 +5,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 # Install NGINX & OpenSSL
 RUN apt-get update && \
     apt-get install -y \
-		nginx \
+		nginx
 		# openssl
 
 # Deletes cached package list files to reduce image size
