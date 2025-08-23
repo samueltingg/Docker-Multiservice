@@ -21,6 +21,8 @@ RUN apt-get update && \
 # Deletes cached package list files to reduce image size
 RUN rm -rf /var/lib/apt/lists/*
 
+# Even though mounted volumes will overwrite it at runtime,
+#   you still want the image itself to be self-consistent when no volumes are used.
 RUN mkdir -p /var/www/html && chown -R www-data:www-data /var/www/html
 
 WORKDIR /var/www/html
