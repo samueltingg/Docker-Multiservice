@@ -32,7 +32,7 @@ fi
 chown -R www-data:www-data /var/www/html
 # have to include this command (already present in Dockefile) again,
 #   cuz if I mount a Docker volume(from host) to /var/www/html when starting the container,
-#   the user permissions are replaced by the ones at the host,
+#   the user permissions are replaced by the volume's own user permissions(usually root)
 #   resulting in 'www-data' user losing permission to /var/www/html
 # In short, this command ensure correct permissions for mounted volumes from host
 
