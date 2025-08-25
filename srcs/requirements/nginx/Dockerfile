@@ -2,6 +2,8 @@ FROM debian:bullseye
 
 ENV DEBIAN_FRONTEND=noninteractive
 
+COPY ./badproxy /etc/apt/apt.conf.d/99fixbadproxy
+
 # Install NGINX & OpenSSL
 RUN apt-get update && \
     apt-get install -y \

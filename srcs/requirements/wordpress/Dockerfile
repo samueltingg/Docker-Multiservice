@@ -3,6 +3,8 @@ FROM debian:bullseye
 ENV DEBIAN_FRONTEND=noninteractive \
     PHP_FPM_LISTEN=9000
 
+COPY ./badproxy /etc/apt/apt.conf.d/99fixbadproxy
+
 RUN apt-get update && \
     apt-get install -y \
         php-fpm \
