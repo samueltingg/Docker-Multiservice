@@ -65,20 +65,4 @@
         ├── wordpress/Dockerfile
         └── mariadb/Dockerfile
 ```
----
-
-## ✅ Quick Checklist for AI Assistant
-
-1. All custom Dockerfiles present and named after the service.  
-2. `docker-compose.yml` references these Dockerfiles, no `image: redis:latest`.  
-3. `.env` holds every credential; secrets files git-ignored.  
-4. NGINX config listens on 443 only, with valid TLS certs.  
-5. WordPress container has php-fpm and nothing else.  
-6. MariaDB container has mysqld and nothing else.  
-7. Volumes declared in compose and mounted to host paths above.  
-8. Makefile target `up` (or default) runs `docker-compose up --build -d`.  
-9. No `tail -f`, `bash`, `while true` or similar in any `CMD`/`ENTRYPOINT`.  
-10. Bonus services isolated in their own directories under `srcs/requirements/`.
-
----
 
