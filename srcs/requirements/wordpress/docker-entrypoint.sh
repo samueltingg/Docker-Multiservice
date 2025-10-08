@@ -9,7 +9,7 @@ chown -R www-data:www-data /run/php
 if [ -n "$WORDPRESS_DB_HOST" ]; then # check if env var is non-empty
     echo "Waiting for MariaDB at $WORDPRESS_DB_HOST..."
     until mariadb -h"$WORDPRESS_DB_HOST" -u"$WORDPRESS_DB_USER" -p"$WORDPRESS_DB_PASSWORD" -e "SELECT 1;" &>/dev/null; do
-        sleep 2
+        sleep 2 #! why does this line hang?
     done
     echo "MariaDB is ready!"
 fi

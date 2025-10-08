@@ -7,21 +7,24 @@ COPY ./badproxy /etc/apt/apt.conf.d/99fixbadproxy
 
 RUN apt-get update && \
     apt-get install -y \
-        php-fpm \
+        php \
         php-mysql \
+        php-fpm \ 
         php-curl \
         php-gd \
-        php-xml \
+        php-intl \
         php-mbstring \
+        php-soap \
+        php-xml \
+        php-xmlrpc \
+        php-zip \
         mariadb-client \
-        wget \
-        curl \
-        unzip \
-        less \
-        nano
+        curl && \
+        # * Deletes cached package list files to reduce image size
+        #   package lists tell `apt` what packages exist in each repository and which versions are available, speeds up when re-installing/update
+        #   Since these packages are not installed in the container the package lists are unecessary
+        rm -rf /var/lib/apt/lists/*
 
-# Deletes cached package list files to reduce image size
-RUN rm -rf /var/lib/apt/lists/*
 
 # Even though mounted volumes will overwrite it at runtime,
 #   you still want the image itself to be self-consistent when no volumes are used.

@@ -1,10 +1,3 @@
-networks:
-  wp-net:
-
-volumes:
-  mariadb_vol:
-  wordpress_vol:
-
 services:
   mariadb:
     build: ./requirements/mariadb
@@ -43,3 +36,11 @@ services:
       - wordpress_vol:/var/www/html
     ports:
       - "80:80" # change to 443 for HTTPs
+
+volumes:
+  mariadb_vol:
+  wordpress_vol:
+
+networks:
+  wp-net:     
+    driver: bridge
