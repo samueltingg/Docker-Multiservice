@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+set -e # Exit immediately if any command fails.
 
 # Ensure runtime dirs that systemd would normally create
 mkdir -p /run/php
@@ -9,7 +9,7 @@ chown -R www-data:www-data /run/php
 if [ -n "$WORDPRESS_DB_HOST" ]; then # check if env var is non-empty
     echo "Waiting for MariaDB at $WORDPRESS_DB_HOST..."
     until mariadb -h"$WORDPRESS_DB_HOST" -u"$WORDPRESS_DB_USER" -p"$WORDPRESS_DB_PASSWORD" -e "SELECT 1;" &>/dev/null; do
-        sleep 2 #! why does this line hang?
+        sleep 2
     done
     echo "MariaDB is ready!"
 fi
@@ -37,3 +37,4 @@ chown -R www-data:www-data /var/www/html
 # In short, this command ensure correct permissions for mounted volumes from host
 
 exec "$@"
+# Runs the command from the Dockerfile’s CMD (in this case php-fpm7.4 -F) as PID 1.
