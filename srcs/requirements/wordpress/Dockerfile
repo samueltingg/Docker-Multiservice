@@ -24,7 +24,10 @@ RUN apt-get update && \
         #   package lists tell `apt` what packages exist in each repository and which versions are available, speeds up when re-installing/update
         #   Since these packages are not installed in the container the package lists are unecessary
         rm -rf /var/lib/apt/lists/*
-        
+
+# Configure PHP-FPM to listen on port 9000 (for NGINX)
+RUN sed -i 's|^listen = .*|listen = 9000|' /etc/php/7.4/fpm/pool.d/www.conf
+
     # Creates the web root folder if not already present
     # /var/www/html: Default folder where WordPress files live and are served from
 RUN mkdir -p /var/www/html && \

@@ -7,7 +7,9 @@ COPY ./badproxy /etc/apt/apt.conf.d/99fixbadproxy
 # Install NGINX & OpenSSL
 RUN apt-get update && \
     apt-get install -y \
-		nginx
+		nginx \
+        # for testing purposes, can be removed later
+        curl 
 		# openssl
 
 # Deletes cached package list files to reduce image size
