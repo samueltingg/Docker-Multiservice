@@ -36,5 +36,6 @@ chown -R www-data:www-data /var/www/html
 #   resulting in 'www-data' user losing permission to /var/www/html
 # In short, this command ensure correct permissions for mounted volumes from host
 
+echo "🚀 Starting php-fpm7.4..."
 exec "$@"
 # Runs the command from the Dockerfile’s CMD (in this case php-fpm7.4 -F) as PID 1.

@@ -38,5 +38,5 @@ if [ ! -d "/var/lib/mysql/mysql" ]; then
     wait "$pid"
 fi
 
-echo "Starting MariaDB..."
+echo "🚀 Starting MariaDB..."
 exec gosu mysql "$@"
