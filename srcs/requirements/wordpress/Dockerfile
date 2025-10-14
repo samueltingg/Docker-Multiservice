@@ -46,6 +46,11 @@ RUN curl -o wordpress.tar.gz https://wordpress.org/latest.tar.gz && \
     tar -xzf wordpress.tar.gz --strip-components=1 && \
     rm wordpress.tar.gz
 
+# Install WP- (for `wp core install` command)
+RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
+    && chmod +x wp-cli.phar \
+    && mv wp-cli.phar /usr/local/bin/wp
+
 # Copy and make entrypoint executable
 COPY docker-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
