@@ -1,17 +1,17 @@
 services:
   mariadb:
-    build: ./requirements/mariadb
-    container_name: mariadb_container
+    build: ./requirements/mariadb # Path to your custom mariadb Dockerfile
+    container_name: mariadb
     env_file:
       - .env
     networks:
       - wp-net
     volumes:
-      - mariadb_vol:/var/lib/mysql
+      - mariadb_data:/var/lib/mysql # bind mount
 
   wordpress:
     build: ./requirements/wordpress # Path to your custom WP+PHP-FPM Dockerfile
-    container_name: wordpress_container
+    container_name: wordpress
     env_file:
       - .env
     networks:
@@ -19,13 +19,11 @@ services:
     depends_on:
       - mariadb
     volumes:
-      - wordpress_vol:/var/www/html
-    expose:
-      - "9000" # Expose PHP-FPM port to other containers (not host)
+      - wordpress_data:/var/www/html # bind mount
 
   nginx:
     build: ./requirements/nginx # Path to your custom nginx Dockerfile
-    container_name: nginx_container
+    container_name: nginx
     env_file:
       - .env
     networks:
@@ -33,13 +31,23 @@ services:
     depends_on:
       - wordpress
     volumes:
-      - wordpress_vol:/var/www/html
+      - wordpress_data:/var/www/html
     ports:
-      - "443:443"
+      - "443:443" # maps port 443 of the host to port 443 of the container
 
 volumes:
-  mariadb_vol:
-  wordpress_vol:
+  mariadb_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /Users/samuelting/data/mariadb
+  wordpress_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /Users/samuelting/data/wordpress
 
 networks:
   wp-net:     
