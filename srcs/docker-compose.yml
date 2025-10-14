@@ -3,6 +3,7 @@ services:
     build: ./requirements/mariadb # Path to your custom mariadb Dockerfile
     image: mariadb
     container_name: mariadb
+    restart: unless-stopped
     env_file:
       - .env
     networks:
@@ -14,6 +15,7 @@ services:
     build: ./requirements/wordpress # Path to your custom WP+PHP-FPM Dockerfile
     image: wordpress
     container_name: wordpress
+    restart: unless-stopped
     env_file:
       - .env
     networks:
@@ -27,6 +29,7 @@ services:
     build: ./requirements/nginx # Path to your custom nginx Dockerfile
     image: nginx
     container_name: nginx
+    restart: unless-stopped
     env_file:
       - .env
     networks:
