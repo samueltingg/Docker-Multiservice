@@ -51,6 +51,15 @@ if [ ! -f /var/www/html/.installed ]; then
     echo "WordPress installation completed!"
 fi
 
+# Pre-create one user
+if ! wp_as_www user get "$WP_USER_NAME" >/dev/null 2>&1; then
+    wp_as_www user create "$WP_USER_NAME" "$WP_USER_EMAIL" \
+        --role="$WP_USER_ROLE" \
+        --user_pass="$WP_USER_PASS"
+
+    echo "WordPress user $WP_USER_NAME created with role $WP_USER_ROLE!"
+fi
+
 # Fix permissions (systemd would normally ensure service user ownership)
 chown -R www-data:www-data /var/www/html
 # have to include this command (already present in Dockefile) again,
