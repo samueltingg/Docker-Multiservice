@@ -41,13 +41,13 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /Users/samuelting/data/mariadb
+      device: ${HOME}/data/mariadb
   wordpress_data:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /Users/samuelting/data/wordpress
+      device: ${HOME}/data/wordpress
 
 networks:
   wp-net:     

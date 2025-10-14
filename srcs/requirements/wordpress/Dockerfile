@@ -50,6 +50,8 @@ RUN curl -o wordpress.tar.gz https://wordpress.org/latest.tar.gz && \
 COPY docker-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
+EXPOSE 9000
+
 ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["php-fpm7.4", "-F"]
 # '-F' -> run in the foreground
