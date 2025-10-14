@@ -1,6 +1,7 @@
 services:
   mariadb:
     build: ./requirements/mariadb # Path to your custom mariadb Dockerfile
+    image: mariadb
     container_name: mariadb
     env_file:
       - .env
@@ -11,6 +12,7 @@ services:
 
   wordpress:
     build: ./requirements/wordpress # Path to your custom WP+PHP-FPM Dockerfile
+    image: wordpress
     container_name: wordpress
     env_file:
       - .env
@@ -23,6 +25,7 @@ services:
 
   nginx:
     build: ./requirements/nginx # Path to your custom nginx Dockerfile
+    image: nginx
     container_name: nginx
     env_file:
       - .env
