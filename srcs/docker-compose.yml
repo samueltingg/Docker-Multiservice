@@ -5,7 +5,7 @@ services:
     env_file:
       - .env
     networks:
-      - wp-net
+      - inception-net
     volumes:
       - mariadb_data:/var/lib/mysql # bind mount
 
@@ -15,7 +15,7 @@ services:
     env_file:
       - .env
     networks:
-      - wp-net
+      - inception-net
     depends_on:
       - mariadb
     volumes:
@@ -27,7 +27,7 @@ services:
     env_file:
       - .env
     networks:
-      - wp-net
+      - inception-net
     depends_on:
       - wordpress
     volumes:
@@ -50,5 +50,5 @@ volumes:
       device: ${HOME}/data/wordpress
 
 networks:
-  wp-net:     
+  inception-net:     
     driver: bridge
