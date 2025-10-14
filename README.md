@@ -6,11 +6,11 @@ A **multi-service Docker infrastructure** using **Docker Compose**, with **TLS-s
 
 ## Containers
 
-| Service     | Base Image¹ | Exposed Port | Notes |
+| Service     | Base Image¹ | Port | Notes |
 |-------------|-------------|--------------|-------|
-| **NGINX**   | Alpine / Debian | 443 only | TLS 1.2 or 1.3, **sole entry point**, terminates SSL |
-| **WordPress** | Alpine / Debian | none | php-fpm **only**, no nginx inside |
-| **MariaDB** | Alpine / Debian | none | runs **only** mysqld |
+| **NGINX**   | Debian | 443:443 (maps to host) | TLS 1.2 or 1.3, **sole entry point**, terminates SSL |
+| **WordPress** | Debian | 9000/tcp | php-fpm **only**, no nginx inside |
+| **MariaDB** | Debian | 3306/tcp | runs **only** mysqld |
 
 ---
 
