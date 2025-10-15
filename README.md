@@ -19,6 +19,10 @@ A **multi-service Docker infrastructure** using **Docker Compose**, with **TLS-s
 * Wordpress Database → mounted at `${HOME}/data/mariadb` (host)  
 * Wordpress Files (.php) → mounted at `${HOME}/data/wordpress` (host)
 
+## Project Setup
+Prerequisites:
+- bind mounts must be present: `${HOME}/data/mariadb`, `${HOME}/data/wordpress`
+
 
 ## 🚀 Lifecycle
 
