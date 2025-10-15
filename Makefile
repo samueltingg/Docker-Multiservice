@@ -57,16 +57,19 @@ status:
 ## Check if all containers are up and healthy
 check:
 	@echo "\033[1;34m[✓] Checking container health...\033[0m"
-	@containers=$$(docker compose -f $(COMPOSE_FILE) ps -q); \
+	@containers=$$(docker compose -f $(COMPOSE_FILE) ps -aq); \
 	if [ -z "$$containers" ]; then \
 		echo "\033[1;31m[✗] No containers found. Did you run 'make up'?\033[0m"; \
 		exit 1; \
 	fi; \
 	for c in $$containers; do \
 		status=$$(docker inspect -f '{{.State.Status}}' $$c); \
+		name=$$(docker inspect -f '{{.Name}}' $$c | sed 's|/||'); \
 		if [ "$$status" != "running" ]; then \
-			echo "\033[1;31m[✗] Container $$c is not running (status: $$status)\033[0m"; \
+			echo "\033[1;31m[✗] Container $$name is not running (status: $$status)\033[0m"; \
 			exit 1; \
+		else \
+			echo "\033[1;32m[✔] Container $$name is running.\033[0m"; \
 		fi; \
 	done; \
 	echo "\033[1;32m[✔] All containers are running successfully!\033[0m"
