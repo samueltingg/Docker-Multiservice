@@ -69,6 +69,6 @@ if ! wp_as_www user get "$WP_USER_NAME" >/dev/null 2>&1; then
 fi
 
 
-echo "🚀 Starting php-fpm7.4..."
+echo "🚀 Starting php-fpm8.2..."
 exec "$@"
 # Runs the command from the Dockerfile’s CMD (in this case php-fpm7.4 -F) as PID 1.

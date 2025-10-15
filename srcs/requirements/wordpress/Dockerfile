@@ -1,4 +1,4 @@
-FROM debian:bullseye
+FROM debian:bookworm
 
 ENV DEBIAN_FRONTEND=noninteractive \
     PHP_FPM_LISTEN=9000
@@ -26,7 +26,7 @@ RUN apt-get update && \
         rm -rf /var/lib/apt/lists/*
 
 # Configure PHP-FPM to listen on port 9000 (for NGINX)
-RUN sed -i 's|^listen = .*|listen = 9000|' /etc/php/7.4/fpm/pool.d/www.conf
+RUN sed -i 's|^listen = .*|listen = 9000|' /etc/php/*/fpm/pool.d/www.conf
 
     # Creates the web root folder if not already present
     # /var/www/html: Default folder where WordPress files live and are served from
@@ -58,5 +58,5 @@ RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 EXPOSE 9000
 
 ENTRYPOINT ["docker-entrypoint.sh"]
-CMD ["php-fpm7.4", "-F"]
+CMD ["php-fpm8.2", "-F"]
 # '-F' -> run in the foreground
